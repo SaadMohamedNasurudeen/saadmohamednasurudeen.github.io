@@ -1,10 +1,735 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Saad Mohamed Nasurudeen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #1a1a24;
+      --accent: #6c63ff;
+      --accent2: #a78bfa;
+      --text: #e8e8f0;
+      --muted: #888899;
+      --border: #2a2a3a;
+      --card: #13131c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 6%;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent2);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 6% 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(167,139,250,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { max-width: 720px; }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.3);
+      color: var(--accent2);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.35rem 0.9rem;
+      border-radius: 99px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 6%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      letter-spacing: -0.5px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ABOUT */
+    .about { background: var(--bg2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent2);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* EDUCATION */
+    .edu-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: border-color 0.2s;
+    }
+
+    .edu-card:hover { border-color: var(--accent); }
+
+    .edu-badge {
+      display: inline-block;
+      background: rgba(108,99,255,0.1);
+      color: var(--accent2);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .edu-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-gpa {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--accent2);
+      font-weight: 500;
+    }
+
+    /* SKILLS */
+    .skills { background: var(--bg2); }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .skill-tag {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .project-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .project-tag {
+      background: rgba(108,99,255,0.1);
+      color: var(--accent2);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    /* ACHIEVEMENTS */
+    .achievements { background: var(--bg2); }
+
+    .achieve-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .achieve-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .achieve-item:hover { border-color: var(--accent); }
+
+    .achieve-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .achieve-item h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .achieve-item p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-box h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.65rem 1.3rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem 6%;
+      color: var(--muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+      .contact-box { padding: 2rem 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Saad Mohamed Nasurudeen</h1>
-  <p>AI & Data Science Student</p>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">SMN</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+
+      <h1>Saad Mohamed<br/><span>Nasurudeen</span></h1>
+      <p class="hero-sub">
+        First year AI & Data Science student at KRCT & IIT Madras.
+        Currently learning Python, exploring AI, and building things one step at a time.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-label">Who I Am</div>
+    <div class="section-title">About Me</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm Saad, a first year B.Tech student in Artificial Intelligence 
+          and Data Science at K. Ramakrishnan College of Technology, 
+          simultaneously pursuing a BS in Data Science and Applications 
+          at IIT Madras.
+        </p>
+        <p>
+          Currently learning Python and exploring the world of AI, 
+          automation, and development. I've participated in multiple 
+          hackathons and tech events across Tamil Nadu, always looking 
+          for opportunities to learn and grow.
+        </p>
+        <p>
+          Based in Trichy, Tamil Nadu. Always open to internships, 
+          collaborations, and new opportunities.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">8.3</div>
+          <div class="stat-label">CGPA at KRCT</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Hackathons & Events</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Institutions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1st</div>
+          <div class="stat-label">Year Student</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Academic Background</div>
+    <div class="section-title">Education</div>
+    <div class="edu-cards">
+      <div class="edu-card">
+        <div class="edu-badge">B.Tech</div>
+        <h3>Artificial Intelligence & Data Science</h3>
+        <p>K. Ramakrishnan College of Technology</p>
+        <p>Anna University | 2025 – 2029</p>
+        <div class="edu-gpa">CGPA: 8.3 / 10</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-badge">BS</div>
+        <h3>Data Science & Applications</h3>
+        <p>Indian Institute of Technology Madras</p>
+        <p>2025 – 2029</p>
+        <div class="edu-gpa">CGPA: 7.0 / 10 (Foundational)</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-badge">HSC</div>
+        <h3>Higher Secondary Certificate</h3>
+        <p>Samadh Higher Secondary School</p>
+        <p>CBSE | 2024 – 2025</p>
+        <div class="edu-gpa">75.8%</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <div class="section-label">What I Know</div>
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <span class="skill-tag">Python (Learning)</span>
+      <span class="skill-tag">C Programming (Basic)</span>
+      <span class="skill-tag">Canva</span>
+      <span class="skill-tag">MS PowerPoint</span>
+      <span class="skill-tag">Research</span>
+      <span class="skill-tag">Problem Solving</span>
+      <span class="skill-tag">Technical Writing</span>
+      <span class="skill-tag">Team Collaboration</span>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">What I've Built</div>
+    <div class="section-title">Projects</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">🤖</div>
+        <h3>AI Assistant Web Interface</h3>
+        <p>
+          Contributed to building a web-based AI assistant interface 
+          during INNOHACK '26, a national level hackathon held at 
+          VIT Vellore as part of a team.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">AI</span>
+          <span class="project-tag">Web</span>
+          <span class="project-tag">Hackathon</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">📚</div>
+        <h3>Rural Edu Toolkit — UBA</h3>
+        <p>
+          Developed a concept and presentation for a digital Rural Edu 
+          Toolkit submitted to Unnat Bharat Abhiyan. Received National 
+          Shortlist recognition in Round 2 by a National Jury.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Education</span>
+          <span class="project-tag">UBA</span>
+          <span class="project-tag">National Shortlist</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🏥</div>
+        <h3>Healthcare Website Prototype</h3>
+        <p>
+          Contributed to designing a healthcare website concept for 
+          senior citizens at MAN-TECH-CURE Hackathon organized by 
+          Sri Manakula Vinayagar Medical College and Hospital.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Healthcare</span>
+          <span class="project-tag">Web Design</span>
+          <span class="project-tag">Hackathon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="achievements" id="achievements">
+    <div class="section-label">Recognition</div>
+    <div class="section-title">Achievements & Certifications</div>
+    <div class="achieve-list">
+      <div class="achieve-item">
+        <div class="achieve-dot"></div>
+        <div>
+          <h4>National Shortlist — UBA Rural Edu Toolkit</h4>
+          <p>National Jury Recognition | November 2025</p>
+        </div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-dot"></div>
+        <div>
+          <h4>Round 2 Qualifier — Prince College Hackathon</h4>
+          <p>Prince Dr. K. Vasudevan College | February 2026</p>
+        </div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-dot"></div>
+        <div>
+          <h4>INNOHACK '26 — National Level Hackathon</h4>
+          <p>VIT Vellore | January 2026</p>
+        </div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-dot"></div>
+        <div>
+          <h4>AI Regional Summit</h4>
+          <p>SASTRA University | November 2025</p>
+        </div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-dot"></div>
+        <div>
+          <h4>TechSpark '26</h4>
+          <p>J.J. College of Engineering, Tiruchirappalli | March 2026</p>
+        </div>
+      </div>
+      <div class="achieve-item">
+        <div class="achieve-dot"></div>
+        <div>
+          <h4>Generative AI Workshop</h4>
+          <p>Neuro Tech Titans, SRM IST | September 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-box">
+      <h3>Let's Connect</h3>
+      <p>Open to internships, collaborations, and opportunities. Feel free to reach out.</p>
+      <div class="contact-links">
+        <a href="mailto:saadmohamednasurudeen07@gmail.com" class="contact-link">
+          ✉️ Email
+        </a>
+        <a href="https://github.com/SaadMohamedNasurudeen" target="_blank" class="contact-link">
+          🐙 GitHub
+        </a>
+        <a href="https://linkedin.com/in/saadmohamednasurudeen" target="_blank" class="contact-link">
+          💼 LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Saad Mohamed Nasurudeen · Built with HTML & CSS</p>
+  </footer>
+
 </body>
 </html>
